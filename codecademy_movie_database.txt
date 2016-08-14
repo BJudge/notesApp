@@ -1,0 +1,49 @@
+movies=Hash.new
+
+movies['The Matrix']= 5
+movies['A shot in the dark']= 4
+
+puts "Choose an option:" 
+puts "1. ADD a movie"
+puts "2. UPDATE an entry"
+puts "3. DISPLAY movies"
+puts "4. DELETE an entry"
+choice=gets.chomp.downcase
+
+case choice
+when "add"
+  puts "Please enter your chosen movie"
+  title = gets.chomp!.to_sym
+  if movies[title.to_sym].nil? 
+  puts "Please rate the movie out of 5 stars"
+  rating = gets.chomp!.to_i
+  movies[title.to_sym] = rating.to_i
+    puts "A movie with the title #{title} was add with          the rating of #{rating}"
+     else
+         puts "This movie already exsists on the database"
+     end
+when "update"
+  puts "Please name the moive you would like to update"
+  title=gets.chomp!
+  if movies[title].nil?
+      puts "#{title} is not currently in the database"
+  else
+      puts "Please rate the movie out of 5 stars"
+       rating = gets.chomp!.to_i
+      movies[title]=rating
+  end
+when 'display'
+  movies.each do |movies, rating|
+    puts "#{movies}: #{rating}"
+end
+when "delete"
+  puts "What title do you wish to remove?"
+  title=gets.chomp!.downcase
+  if movies[title].nil?
+    puts "#{title} is not on our database"
+   else
+       movies.delete(title)
+    end
+else 
+    puts "Error!"
+end
